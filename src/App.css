@@ -1,0 +1,8 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #deb6ab;
+}
