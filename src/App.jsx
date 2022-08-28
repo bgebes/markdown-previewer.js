@@ -15,6 +15,9 @@ function App() {
         <InputCard />
         <PreviewCard />
       </div>
+      <div className="text-center">
+        Made by <a href="https://github.com/bgebes">bgebes</a>
+      </div>
     </>
   );
 }

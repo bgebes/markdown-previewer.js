@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import { getText, getExampleText, getHintStatus } from '../../actions/actions';
 
 function PreviewCard() {
-  return (
+  const [text, exampleText] = [getText(), getExampleText()];
+  const hintStatus = getHintStatus();
+  const finalText = hintStatus ? exampleText : text;
+
+  return useCallback(
     <div
-      className="w-50 shadow rounded m-2 p-3"
+      className="w-50 shadow rounded m-2 p-3 user-select-none"
       style={{ minHeight: '75vh', backgroundColor: '#F5E8C7' }}
     >
-      <textarea
-        className="w-100 border-0"
-        style={{
-          height: '75vh',
-          resize: 'none',
-          background: 'none',
-          outline: '0px',
-        }}
-        type="text"
-        defaultValue="this is user input"
-      />
-    </div>
+      <div style={{ height: '75vh', overflowY: 'auto' }}>
+        <ReactMarkdown children={finalText} />
+      </div>
+    </div>,
+    [finalText]
   );
 }
 

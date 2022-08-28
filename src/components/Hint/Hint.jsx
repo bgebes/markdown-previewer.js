@@ -1,15 +1,21 @@
-import React from 'react';
+import { useCallback } from 'react';
+import { getHintStatus, handleHintStatus } from '../../actions/actions';
 
 function Hint() {
-  return (
-    <div className="d-flex justify-content-end">
+  const hintStatus = getHintStatus();
+  const hintStyle = hintStatus ? 'bg-light shadow' : '';
+
+  return useCallback(
+    <div className="d-flex justify-content-end align-items-center">
       <div
-        className="border border-secondary fs-1 fw-bold px-3 m-3 shadow"
-        style={{ width: 'fit-content', backgroundColor: '#ECCCB2' }}
+        className={`border border-secondary fs-1 fw-bold px-3 m-3 user-select-none rounded ${hintStyle}`}
+        role="button"
+        onClick={handleHintStatus}
       >
         ?
       </div>
-    </div>
+    </div>,
+    [hintStyle, handleHintStatus]
   );
 }
 

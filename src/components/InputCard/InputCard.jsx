@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import {
+  getText,
+  getExampleText,
+  handleText,
+  getHintStatus,
+} from '../../actions/actions';
 
 function InputCard() {
-  return (
+  const [text, exampleText] = [getText(), getExampleText()];
+  const hintStatus = getHintStatus();
+  const finalText = hintStatus ? exampleText : text;
+
+  return useCallback(
     <div
       className="w-50 shadow rounded m-2 p-3"
       style={{ minHeight: '75vh', backgroundColor: '#F5E8C7' }}
@@ -15,9 +25,11 @@ function InputCard() {
           outline: '0px',
         }}
         type="text"
-        defaultValue="this is user input"
+        value={finalText}
+        onChange={handleText}
       />
-    </div>
+    </div>,
+    [finalText, handleText]
   );
 }
 
